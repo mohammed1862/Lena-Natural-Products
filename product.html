@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل المنتج | Lēna Natural Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Lēna <span>Natural</span></a>
+            </div>
+            <a href="checkout.html" class="cart-icon-btn">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span id="cartCount" class="cart-badge">0</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 60px 20px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
+            <div>
+                <img id="productImg" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80" alt="صورة المنتج" style="width: 100%; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+            </div>
+            <div>
+                <h1 id="productTitle" style="font-size: 32px; color: var(--primary); margin-bottom: 15px;">سيروم فيتامين سي للبشرة</h1>
+                <p id="productPrice" style="font-size: 24px; font-weight: bold; color: var(--accent); margin-bottom: 20px;">250 ج.م</p>
+                <p id="productDesc" style="color: var(--gray); margin-bottom: 25px; line-height: 1.8;">سيروم طبيعي غني بمضادات الأكسدة وفيتامين سي النقي، يعمل على تفتيح البشرة، توحيد لونها، وتقليل ظهور التجاعيد والخطوط الدقيقة لتستمتعي ببشرة شبابية متألقة.</p>
+                
+                <div style="margin-bottom: 25px;">
+                    <h4 style="margin-bottom: 10px;">طريقة الاستخدام:</h4>
+                    <p style="color: var(--gray); font-size: 14px;">يُضع بضع قطرات على بشرة نظيفة تدلك بلطف صباحاً ومساءً.</p>
+                </div>
+
+                <button id="addToCartBtn" class="btn btn-primary" style="width: 100%; text-align: center; border: none; cursor: pointer; font-size: 16px;">إضافة إلى سلة التسوق</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">تم إضافة المنتج إلى السلة بنجاح! ✨</div>
+    <script src="script.js"></script>
+    <script>
+        // محاكاة ديناميكية لتفاصيل المنتج بناءً على الرابط
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id') || '1';
+        
+        const productsData = {
+            '1': { name: 'سيروم فيتامين سي للبشرة', price: 250, img: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80', desc: 'سيروم طبيعي غني بمضادات الأكسدة وفيتامين سي النقي لتفتيح ونضارة البشرة.' },
+            '2': { name: 'زيت أرجان مغربي نقي للشعر', price: 320, img: 'https://images.unsplash.com/photo-1608248597359-974dd5c00e12?auto=format&fit=crop&w=600&q=80', desc: 'زيت أرجان أصلي يغذي الشعر بعمق ويمنحه نعومة ولمعاناً لا مثيل له.' },
+            '3': { name: 'مقشر للجسم بالقهوة والزبدة', price: 180, img: 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80', desc: 'مقشر طبيعي يزيل الخلايا الميتة ويترك بشرتك ناعمة ورطبة كالحرير.' }
+        };
+
+        if(productsData[productId]) {
+            document.getElementById('productTitle').textContent = productsData[productId].name;
+            document.getElementById('productPrice').textContent = productsData[productId].price + ' ج.م';
+            document.getElementById('productImg').src = productsData[productId].img;
+            document.getElementById('productDesc').textContent = productsData[productId].desc;
+            
+            document.getElementById('addToCartBtn').onclick = function() {
+                addToCart(productsData[productId].name, productsData[productId].price, productsData[productId].img);
+            }
+        }
+    </script>
+</body>
+</html>

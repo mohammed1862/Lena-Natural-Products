@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lēna Natural Products | منتجات العناية الطبيعية</title>
+    <!-- خطوط جوجل الفاخرة -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- مكتبة أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- ملف التصميم -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- شريط الإعلانات العلوي -->
+    <div class="announcement-bar">
+        <p>✨ شحن مجاني للطلبات فوق 500 جنيه | استمتعي بجمال طبيعي 100% ✨</p>
+    </div>
+
+    <!-- الهيدر الرئيسي -->
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Lēna <span>Natural</span></a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">الرئيسية</a></li>
+                    <li><a href="#products">المنتجات</a></li>
+                    <li><a href="#contact">تواصل معنا</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="ابحثي عن منتج...">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <!-- زر الوضع الداكن -->
+                <button id="darkModeToggle" class="cart-icon-btn" title="تغيير المظهر" style="cursor: pointer; border: none; background: #f3e5f5;">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <!-- سلة التسوق -->
+                <a href="checkout.html" class="cart-icon-btn" title="سلة التسوق">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span id="cartCount" class="cart-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- البانر الرئيسي (Hero Section) -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="hero-subtitle">طبيعية 100% وخالية من الكيماويات</span>
+            <h1>سر جمالك المستوحى من الطبيعة مع Lēna</h1>
+            <p>دللي بشرتك وشعركِ بأفضل الزيوت والمنتجات العضوية المصنوعة بكل حب وعناية لتعيدي إشراقتكِ الطبيعية.</p>
+            <a href="#products" class="btn btn-primary">تصفحي المنتجات الآن</a>
+        </div>
+    </section>
+
+    <!-- قسم مميزات المتجر -->
+    <section class="features-section">
+        <div class="container features-grid">
+            <div class="feature-item">
+                <i class="fa-solid fa-leaf"></i>
+                <h3>مكونات طبيعية 100%</h3>
+                <p>مختارة بعناية فائقة لتناسب جميع أنواع البشرة.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-truck-fast"></i>
+                <h3>شحن سريع وآمن</h3>
+                <p>توصيل لجميع المحافظات في أسرع وقت.</p>
+            </div>
+            <div class="feature-item">
+                <i class="fa-solid fa-shield-heart"></i>
+                <h3>جودة مضمونة</h3>
+                <p>مرخصة ومختبرة لضمان أفضل النتائج لجمالك.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المنتجات مع زر الواتساب -->
+    <section id="products" class="products-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>منتجاتنا المميزة</h2>
+                <p>اختاري ما يناسب روتين العناية الخاص بكِ</p>
+            </div>
+
+            <div class="products-grid" id="productsGrid">
+                <!-- المنتج الأول -->
+                <div class="product-card" data-name="سيروم فيتامين سي للبشرة">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80" alt="سيروم فيتامين سي">
+                        <span class="badge">الأكثر مبيعاً</span>
+                    </div>
+                    <div class="product-info">
+                        <h3>سيروم فيتامين سي للبشرة</h3>
+                        <p class="product-desc">يمنح بشرتك نضارة وإشراقة فورية ويحارب علامات التقدم السنوي.</p>
+                        <div class="product-footer">
+                            <span class="price">250 ج.م</span>
+                            <div class="product-buttons">
+                                <a href="product.html?id=1" class="btn-details">التفاصيل</a>
+                                <button class="btn-add" onclick="addToCart('سيروم فيتامين سي', 250, 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80')">إضافة للسلة</button>
+                            </div>
+                            <!-- زر الطلب السريع عبر واتساب -->
+                            <a href="https://wa.me/201000000000?text=مرحباً، أود طلب منتج: سيروم فيتامين سي، السعر: 250 ج.م" target="_blank" class="btn-whatsapp">
+                                <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> اطلب عبر واتساب
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج الثاني -->
+                <div class="product-card" data-name="زيت ارجان مغربي نقي">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1608248597359-974dd5c00e12?auto=format&fit=crop&w=600&q=80" alt="زيت ارجان">
+                    </div>
+                    <div class="product-info">
+                        <h3>زيت أرجان مغربي نقي للشعر</h3>
+                        <p class="product-desc">يغذي الشعر بعمق ويمنحه نعومة ولمعاناً لا مثيل له.</p>
+                        <div class="product-footer">
+                            <span class="price">320 ج.م</span>
+                            <div class="product-buttons">
+                                <a href="product.html?id=2" class="btn-details">التفاصيل</a>
+                                <button class="btn-add" onclick="addToCart('زيت أرجان مغربي', 320, 'https://images.unsplash.com/photo-1608248597359-974dd5c00e12?auto=format&fit=crop&w=600&q=80')">إضافة للسلة</button>
+                            </div>
+                            <!-- زر الطلب السريع عبر واتساب -->
+                            <a href="https://wa.me/201000000000?text=مرحباً، أود طلب منتج: زيت أرجان مغربي نقي للشعر، السعر: 320 ج.م" target="_blank" class="btn-whatsapp">
+                                <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> اطلب عبر واتساب
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المنتج الثالث -->
+                <div class="product-card" data-name="مقشر للجسم بالقهوة والزبدة">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80" alt="مقشر للجسم">
+                    </div>
+                    <div class="product-info">
+                        <h3>مقشر للجسم بالقهوة والزبدة</h3>
+                        <p class="product-desc">يزيل الخلايا الميتة ويترك بشرتك ناعمة كالحرير ورطبة تماماً.</p>
+                        <div class="product-footer">
+                            <span class="price">180 ج.م</span>
+                            <div class="product-buttons">
+                                <a href="product.html?id=3" class="btn-details">التفاصيل</a>
+                                <button class="btn-add" onclick="addToCart('مقشر الجسم بالقهوة', 180, 'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=600&q=80')">إضافة للسلة</button>
+                            </div>
+                            <!-- زر الطلب السريع عبر واتساب -->
+                            <a href="https://wa.me/201000000000?text=مرحباً، أود طلب منتج: مقشر للجسم بالقهوة والزبدة، السعر: 180 ج.م" target="_blank" class="btn-whatsapp">
+                                <i class="fa-brands fa-whatsapp" style="font-size: 18px;"></i> اطلب عبر واتساب
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer class="main-footer" id="contact">
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <h3>Lēna <span>Natural</span></h3>
+                <p>وجهتك الأولى لمنتجات العناية الطبيعية المستوحاة من سحر الطبيعة لنشر الجمال والثقة.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>روابط سريعة</h4>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="#products">المنتجات</a></li>
+                    <li><a href="checkout.html">سلة التسوق</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>تواصل معنا</h4>
+                <p><i class="fa-solid fa-phone"></i> +20 100 000 0000</p>
+                <p><i class="fa-solid fa-envelope"></i> info@lenanatural.com</p>
+                <p><i class="fa-solid fa-location-dot"></i> القاهرة، مصر</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>جميع الحقوق محفوظة &copy; 2026 Lēna Natural Products</p>
+        </div>
+    </footer>
+
+    <!-- التنبيه العائم -->
+    <div id="toast" class="toast">تم إضافة المنتج إلى السلة بنجاح! ✨</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

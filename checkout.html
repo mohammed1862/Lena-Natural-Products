@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الطلب | Lēna Natural Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Lēna <span>Natural</span></a>
+            </div>
+            <a href="index.html" class="btn-details" style="padding: 8px 15px;"><i class="fa-solid fa-arrow-right"></i> العودة للمتجر</a>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 50px 20px;">
+        <h2 style="color: var(--primary); margin-bottom: 30px; text-align: center;">سلة التسوق وإتمام الطلب</h2>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
+            <!-- جدول المنتجات في السلة -->
+            <div style="background: var(--white); padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">منتجاتك المبرمجة</h3>
+                <div id="cartItemsContainer">
+                    <!-- يتم تعبئتها ديناميكياً -->
+                </div>
+                <div style="margin-top: 20px; border-top: 2px solid var(--border-color); padding-top: 15px; display: flex; justify-content: space-between; font-size: 18px; font-weight: bold;">
+                    <span>الإجمالي الكلي:</span>
+                    <span id="cartTotalPrice" style="color: var(--primary);">0 ج.م</span>
+                </div>
+            </div>
+
+            <!-- نموذج بيانات العميل -->
+            <div style="background: var(--white); padding: 25px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 10px;">بيانات الشحن والتوصيل</h3>
+                <form id="checkoutForm" onsubmit="submitOrder(event)">
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">الاسم الكامل</label>
+                        <input type="text" id="clientName" required placeholder="اكتب اسمك الثلاثي" style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; outline: none;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">رقم الهاتف (واتساب)</label>
+                        <input type="tel" id="clientPhone" required placeholder="010xxxxxxxx" style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; outline: none;">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">المحافظة / المدينة</label>
+                        <input type="text" id="clientCity" required placeholder="مثال: القاهرة، الجيزة..." style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; outline: none;">
+                    </div>
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 5px; font-weight: 500;">العنوان بالتفصيل</label>
+                        <textarea id="clientAddress" required rows="3" placeholder="الشارع، رقم العقار، الدور..." style="width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 8px; outline: none;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; border: none; cursor: pointer; text-align: center; font-size: 16px;">تأكيد الطلب عبر الواتساب <i class="fa-brands fa-whatsapp"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // عرض محتويات السلة في صفحة الدفع
+        function renderCheckoutCart() {
+            const container = document.getElementById('cartItemsContainer');
+            const totalPriceEl = document.getElementById('cartTotalPrice');
+            
+            if (cart.length === 0) {
+                container.innerHTML = '<p style="color: var(--gray); text-align: center; padding: 20px;">سلة التسوق فارغة حالياً.</p>';
+                totalPriceEl.textContent = '0 ج.م';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                let itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                html += `
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 15px;">
+                            <img src="${item.image}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 8px;">
+                            <div>
+                                <h4 style="font-size: 15px; margin-bottom: 3px;">${item.name}</h4>
+                                <span style="color: var(--gray); font-size: 13px;">${item.price} ج.م × ${item.quantity}</span>
+                            </div>
+                        </div>
+                        <button onclick="removeItem(${index})" style="background: #ff7675; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            totalPriceEl.textContent = total + ' ج.م';
+        }
+
+        function removeItem(index) {
+            cart.splice(index, 1);
+            saveCart();
+            renderCheckoutCart();
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            if (cart.length === 0) {
+                alert('سلة التسوق فارغة!');
+                return;
+            }
+
+            const name = document.getElementById('clientName').value;
+            const phone = document.getElementById('clientPhone').value;
+            const city = document.getElementById('clientCity').value;
+            const address = document.getElementById('clientAddress').value;
+
+            let orderText = `*طلب جديد من متجر Lēna Natural* 🌿\n\n`;
+            orderText += `👤 *الاسم:* ${name}\n`;
+            orderText += `📞 *الهاتف:* ${phone}\n`;
+            orderText += `🏙️ *المحافظة:* ${city}\n`;
+            orderText += `📍 *العنوان:* ${address}\n\n`;
+            orderText += `🛍️ *المنتجات المطلوبة:*\n`;
+
+            let total = 0;
+            cart.forEach(item => {
+                let sub = item.price * item.quantity;
+                total += sub;
+                orderText += `- ${item.name} (الكمية: ${item.quantity}) - ${sub} ج.م\n`;
+            });
+
+            orderText += `\n💰 *الإجمالي الكلي:* ${total} ج.م`;
+
+            // توجيه العميل للواتساب مع الرسالة الجاهزة
+            const encodedText = encodeURIComponent(orderText);
+            const whatsappNumber = "201000000000"; // استبدله برقم الواتساب الخاص بك
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
+        }
+
+        // تنفيذ عرض السلة عند تحميل الصفحة
+        renderCheckoutCart();
+    </script>
+</body>
+</html>
